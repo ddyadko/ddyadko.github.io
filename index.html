@@ -4,83 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Follows Function</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        header {
-            background: #333;
-            color: #fff;
-            padding: 1rem 0;
-            text-align: center;
-        }
-        nav {
-            background: #444;
-            padding: 1rem;
-            text-align: center;
-        }
-        nav a {
-            color: #fff;
-            margin: 0 15px;
-            text-decoration: none;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
-        }
-        main {
-            padding: 20px;
-            background: #fff;
-            margin-top: 20px;
-        }
-        footer {
-            background: #333;
-            color: #fff;
-            text-align: center;
-            padding: 1rem 0;
-            margin-top: 20px;
-        }
-        .post {
-            margin-bottom: 20px;
-        }
-        .post h2 {
-            color: #333;
-        }
-        .post p {
-            line-height: 1.6;
-        }
-    </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Form Follows Function</h1>
-        </div>
-    </header>
+    <<header>
+    <h1 style="margin-bottom: 0;">Form Follows Function</h1>
+    <h6 style="margin-top: 0;">Personal Blog of Danile Dyadko</h6>
     <nav>
-        <div class="container">
-            <a href="#">Home</a>
-            <a href="faq.html">FAQ</a>
-            <a href="#">Contact</a>
-        </div>
+        <ul>
+            <li><a href="faq.html">My first blog</a></li>
+            <li><a href=""">Contact</a></li>
+        </ul>
     </nav>
-    <div class="container">
-        <main>
-            <article class="post">
-                <h2>Blog Post Title</h2>
-                <p>test</article>
-            <article class="post">
-                <h2>Another Blog Post</h2>
-                <p>Curabitur cursus, metus nec vehicula lacinia, ante turpis volutpat velit, eu condimentum mauris tortor a nisi.</p>
-            </article>
-        </main>
-    </div>
+</header>
+
+    <main>
+        <section id="about">
+            <h2>FAQ & Disclaimer</h2>
+            <p>Please refer to <a href="faq.html">FAQ</a> and Disclaimer for more information</p>
+        </section>
+        <section id="contact">
+            <h2>Contact</h2>
+            <p>I prefer any and all contact through <a href="www.linkedin.com/in/ddyadko">LinkedIn</a> (this in order to reduce anonimity of "trollers" and bots)</p>
+        </section>
+    </main>
     <footer>
-        <p>&copy; 2024 My Blog</p>
+        <p>&copy; 2024 Danile Dyadko</p>
     </footer>
 </body>
 </html>
