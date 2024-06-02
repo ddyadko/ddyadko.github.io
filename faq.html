@@ -18,6 +18,27 @@
     
 
     <main>
+
+
+        <form id="captcha-form" onsubmit="return validateCaptcha()">
+  <label for="captcha">What is 2 + 2?</label><br>
+  <input type="text" id="captcha" name="captcha" required><br>
+  <input type="submit" value="Submit">
+</form>
+
+<script>
+  function validateCaptcha() {
+    var userInput = document.getElementById('captcha').value;
+
+    if (userInput.trim() === '4') {
+      alert('Captcha validated successfully!');
+      return true; // Allow form submission
+    } else {
+      alert('Incorrect Captcha! Please try again.');
+      return false; // Prevent form submission
+    }
+  }
+</script>
             <article class="post">
                    <h2>Frequently Asked Questions</h2>
     <h3>Who are you?</h3>
@@ -27,13 +48,13 @@
     <p> I truly believe having "skin in the game" (reducing anonymity) in regard to online discussions will increase the human aspect.</p>
 
     <h3>Why does this website look and feel bare-bone</h3>
-    <p>I do not want to distract people from the message(s) I want to convey by implementing arbitraire cosmetics. Besides I truly believe we are over-stimulated in the Western world which is the cause of many psychological stressors we experience. Less stimulation feels more freeing. Expect a full blogpost about my ideas about this in the near future.</p>
+    <p>I do not want to distract people from the message(s) I want to convey by implementing arbitraire cosmetics. Besides I truly believe we are over-stimulated in the Western world which is the cause of many psychological stressors we experience. Less stimulation feels more freeing. Expect a full blogpost about my ideas about this in the near future. Besides: it reduces maintainance, improves security and is mobile-responsive</p>
     
     <h3>Why did you make this website?</h3>
     <p>It started out with not being able to post my thoughts on LinkedIn due to characther limitations. This moved me to screenshotting my thoughts from a Word Processor and posting it. This made me realise that perhaps creatign a personal blog would be a better solution. Only time will tell.</p>
 
      <h3>What is the techstack for this website?</h3>
-     <p>Hosting & CMS: Github Pages. Domain Name: Dynadot. Languages used: HTML only</p>
+     <p>Hosting & CMS: Github Pages. Domain Name: Dynadot. SSL: Lets Encrypt. Language(s) used: HTML only</p>
 
      <h3>Do you save cookies?</h3>
      <p>No.</p>
