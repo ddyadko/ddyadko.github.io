@@ -35,7 +35,6 @@
       height: 100%;
       background-color: rgba(0, 0, 0, 0.9); /* Completely black */
       z-index: 9999;
-      display: none;
     }
 
     .popup-container {
@@ -48,7 +47,6 @@
       border: 2px solid #ccc;
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
       z-index: 10000;
-      display: none;
       color: #000;
     }
 
@@ -72,24 +70,18 @@ function createPopupCaptcha() {
   // Create the pop-up container
   var popupContainer = document.createElement('div');
   popupContainer.className = 'popup-container';
-  document.body.appendChild(popupContainer);
-
-  // Add CAPTCHA content to the pop-up container
-  var num1 = Math.floor(Math.random() * 10);
-  var num2 = Math.floor(Math.random() * 10);
-  var operator = Math.random() < 0.5 ? '+' : '-';
-  var answer = operator === '+' ? num1 + num2 : num1 - num2;
   popupContainer.innerHTML = `
     <h2>You need to solve a simple math question to access the website.</h2>
-    <p>Please solve: ${num1} ${operator} ${num2} =</p>
+    <p>Please solve: 2 + 2 =</p>
     <input type="text" id="captcha-input" name="captcha-input" placeholder="Enter your answer">
     <button id="captcha-submit" type="button">Submit</button>
   `;
+  document.body.appendChild(popupContainer);
 
   // Function to handle CAPTCHA submission
   document.getElementById('captcha-submit').addEventListener('click', function() {
     var userInput = parseInt(document.getElementById('captcha-input').value);
-    if (userInput === answer) {
+    if (userInput === 4) { // 2 + 2 = 4
       // If answer is correct, hide the pop-up
       popupContainer.style.display = 'none';
       overlay.style.display = 'none';
