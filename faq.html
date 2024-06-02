@@ -19,25 +19,68 @@
 
     <main>
 
-
-        <form id="captcha-form" onsubmit="return validateCaptcha()">
-  <label for="captcha">What is 2 + 2?</label><br>
-  <input type="text" id="captcha" name="captcha" required><br>
-  <input type="submit" value="Submit">
-</form>
-
-<script>
-  function validateCaptcha() {
-    var userInput = document.getElementById('captcha').value;
-
-    if (userInput.trim() === '4') {
-      alert('Captcha validated successfully!');
-      return true; // Allow form submission
-    } else {
-      alert('Incorrect Captcha! Please try again.');
-      return false; // Prevent form submission
+<style>
+    /* CSS styles for the pop-up CAPTCHA */
+    .popup-container {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      padding: 20px;
+      border: 2px solid #ccc;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+      z-index: 9999;
     }
-  }
+
+    .popup-container h2 {
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- JavaScript code to create the pop-up CAPTCHA -->
+<script>
+// Function to create the pop-up CAPTCHA
+function createPopupCaptcha() {
+  // Create the pop-up container
+  var popupContainer = document.createElement('div');
+  popupContainer.className = 'popup-container';
+  document.body.appendChild(popupContainer);
+
+  // Add CAPTCHA content to the pop-up container
+  popupContainer.innerHTML = `
+    <h2>Are you a human?</h2>
+    <div class="captcha-image">
+      <img id="captcha-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wEEwYJMz4wIMgAAABHSURBVDjLY/z//z8DByME/8P/DC0AAnKRAABozFgCVHgDoB/gsUYH+EIMUBC8jAwCmSfCgAoiHkGEiAIACiAOEWcZ6eRAAAAAElFTkSuQmCC" alt="CAPTCHA">
+      <button type="button" id="refresh-captcha">Refresh</button>
+    </div>
+    <input type="text" id="captcha-input" name="captcha-input" placeholder="Enter CAPTCHA">
+    <button id="captcha-submit" type="button">Submit</button>
+  `;
+
+  // Function to handle CAPTCHA submission
+  document.getElementById('captcha-submit').addEventListener('click', function() {
+    var userInput = document.getElementById('captcha-input').value;
+    // For simplicity, let's assume the correct CAPTCHA code is 'your_captcha_code'
+    if (userInput === 'your_captcha_code') {
+      // If CAPTCHA is correct, close the pop-up
+      popupContainer.style.display = 'none';
+    } else {
+      // If CAPTCHA is incorrect, redirect to Google
+      window.location.href = 'https://www.google.com';
+    }
+  });
+
+  // Function to refresh CAPTCHA
+  document.getElementById('refresh-captcha').addEventListener('click', function() {
+    document.getElementById('captcha-img').src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wEEwYJMz4wIMgAAABHSURBVDjLY/z//z8DByME/8P/DC0AAnKRAABozFgCVHgDoB/gsUYH+EIMUBC8jAwCmSfCgAoiHkGEiAIACiAOEWcZ6eRAAAAAElFTkSuQmCC?' + Date.now();
+  });
+}
+
+// Call the function to create the pop-up CAPTCHA when the page loads
+window.onload = createPopupCaptcha;
 </script>
             <article class="post">
                    <h2>Frequently Asked Questions</h2>
