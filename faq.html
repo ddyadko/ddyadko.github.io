@@ -19,8 +19,19 @@
 
     <main>
 
-<style>
+  <style>
     /* CSS styles for the pop-up CAPTCHA */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* Transparent black */
+      z-index: 9999;
+      display: none;
+    }
+
     .popup-container {
       position: fixed;
       top: 50%;
@@ -30,7 +41,8 @@
       padding: 20px;
       border: 2px solid #ccc;
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-      z-index: 9999;
+      z-index: 10000;
+      display: none;
     }
 
     .popup-container h2 {
@@ -40,42 +52,44 @@
 </head>
 <body>
 
+<div class="overlay"></div>
+
 <!-- JavaScript code to create the pop-up CAPTCHA -->
 <script>
 // Function to create the pop-up CAPTCHA
 function createPopupCaptcha() {
+  // Create overlay
+  var overlay = document.querySelector('.overlay');
+  overlay.style.display = 'block';
+
   // Create the pop-up container
   var popupContainer = document.createElement('div');
   popupContainer.className = 'popup-container';
   document.body.appendChild(popupContainer);
 
   // Add CAPTCHA content to the pop-up container
+  var num1 = Math.floor(Math.random() * 10);
+  var num2 = Math.floor(Math.random() * 10);
+  var operator = Math.random() < 0.5 ? '+' : '-';
+  var answer = operator === '+' ? num1 + num2 : num1 - num2;
   popupContainer.innerHTML = `
-    <h2>Are you a human?</h2>
-    <div class="captcha-image">
-      <img id="captcha-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wEEwYJMz4wIMgAAABHSURBVDjLY/z//z8DByME/8P/DC0AAnKRAABozFgCVHgDoB/gsUYH+EIMUBC8jAwCmSfCgAoiHkGEiAIACiAOEWcZ6eRAAAAAElFTkSuQmCC" alt="CAPTCHA">
-      <button type="button" id="refresh-captcha">Refresh</button>
-    </div>
-    <input type="text" id="captcha-input" name="captcha-input" placeholder="Enter CAPTCHA">
+    <h2>You need to solve a simple math question to access the website.</h2>
+    <p>Please solve: ${num1} ${operator} ${num2} =</p>
+    <input type="text" id="captcha-input" name="captcha-input" placeholder="Enter your answer">
     <button id="captcha-submit" type="button">Submit</button>
   `;
 
   // Function to handle CAPTCHA submission
   document.getElementById('captcha-submit').addEventListener('click', function() {
-    var userInput = document.getElementById('captcha-input').value;
-    // For simplicity, let's assume the correct CAPTCHA code is 'your_captcha_code'
-    if (userInput === 'your_captcha_code') {
-      // If CAPTCHA is correct, close the pop-up
+    var userInput = parseInt(document.getElementById('captcha-input').value);
+    if (userInput === answer) {
+      // If answer is correct, hide the pop-up
       popupContainer.style.display = 'none';
+      overlay.style.display = 'none';
     } else {
-      // If CAPTCHA is incorrect, redirect to Google
-      window.location.href = 'https://www.google.com';
+      // If answer is incorrect, alert and keep the pop-up
+      alert('Incorrect answer. Please try again.');
     }
-  });
-
-  // Function to refresh CAPTCHA
-  document.getElementById('refresh-captcha').addEventListener('click', function() {
-    document.getElementById('captcha-img').src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wEEwYJMz4wIMgAAABHSURBVDjLY/z//z8DByME/8P/DC0AAnKRAABozFgCVHgDoB/gsUYH+EIMUBC8jAwCmSfCgAoiHkGEiAIACiAOEWcZ6eRAAAAAElFTkSuQmCC?' + Date.now();
   });
 }
 
